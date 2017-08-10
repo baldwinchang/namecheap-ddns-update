@@ -10,7 +10,7 @@ fi
 
 # Update the domain subdomains
 update() {
-  while IFS=',' read -ra SUBDOMAIN_ARRAY; do
+  while IFS=',' read -ra $SUBDOMAIN_ARRAY; do
     for raw_subdomain in "${SUBDOMAIN_ARRAY[@]}"; do
       SUBDOMAIN="$(echo -e $raw_subdomain | tr -d '[[:space:]]')"
       echo "Registering subdomain: $SUBDOMAIN.$DOMAIN, to IP address: $IP"
@@ -89,7 +89,11 @@ shift "$((OPTIND-1))" # Shift off the options and optional --.
 PASS=$NC_DDNS_PASS
 
 # Create the static URL
-BASE_URL="https://dynamicdns.park-your-domain.com/update?domain=$DOMAIN&password=$PASS&ip=$IP"
+BASE_URL="https://dynamicdns.park-your-domain.com/update?domain=$DOMAIN&password=$PASS"
+
+if [ "$IP" ]; then
+  BASE_URL="$BASE_URL&ip=$IP"
+fi
 
 if [ "$INTERVAL" ]; then
   # Run in a loop every inteval
