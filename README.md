@@ -20,5 +20,5 @@ docker pull baldwinchang/namecheap-ddns-update
 
 Run the image you just built, passing in the environment variables to configure the script
 ```
-docker run -e "NC_DDNS_PASS=123456" -e "DOMAIN=example.com" -e "SUBDOMAIN_ARRAY=abc,xyz" -e "INTERVAL=10s" -d baldwinchang/namecheap-ddns-update
+docker run -e "NC_DDNS_PASS=123456" -e "DOMAIN=example.com" -e "SUBDOMAIN=abc" -e "INTERVAL=10s" -d baldwinchang/namecheap-ddns-update
 ```
